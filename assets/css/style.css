@@ -1,3 +1,55 @@
 * {
     border: 1px solid black;
 }
+
+header {
+    background-image: linear-gradient(to right, rgb(44, 67, 186), rgb(25, 2, 95));
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    color: white;
+    margin: 5px 0;
+    width: fit-content;
+    position: relative;
+    left: 150px;
+}
+
+.search-weather {
+    display: flex;
+}
+
+aside {
+    margin: 5px;
+}
+
+aside * {
+    margin: 5px;
+}
+
+main {
+    flex-grow: 4;
+    margin: 5px;
+    /* display: flex;
+    flex-direction: column; */
+}
+
+main section * {
+    margin: 5px;
+}
+
+main section ul li {
+}
+
+main div {
+    display: flex;
+}
+
+main div section {
+    margin: 10px;
+    flex-grow: 3;
+    background-color: rgb(17, 8, 98);
+    color: white;
+}

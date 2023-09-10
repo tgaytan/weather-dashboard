@@ -13,78 +13,87 @@
         <h1>Weather Dashboard</h1>
     </header>
 
-    <!-- aside element is for the search box and search history -->
-    <aside>
-        <h2>Search for a city:</h2>
-        <input type="search" id="searchBox" name="searchBox"></input>
-        <button type="submit">Search</button>
-    </aside>
+    <div class="search-weather">
 
-    <!-- main element is to display weather for selected city -->
-    <main>
-        <!-- this section element is for today's weather -->
-        <section>
-            <h2>City Name</h2>
+        <!-- aside element is for the search box and search history -->
+        <aside>
+            <h2>Search for a city:</h2>
+            <input type="search" id="searchBox" name="searchBox"></input>
+            <button type="submit">Search</button>
             <ul>
-                <li>Temp:</li>
-                <li>Wind:</li>
-                <li>Humidity:</li>
+                <li>Search results</li>
+                <li>Search results</li>
+                <li>Search results</li>
+                <li>Search results</li>
+                <li>Search results</li>
             </ul>
-        </section>
+        </aside>
 
-        <!-- this section element is for 5 day forecast -->
-        <section>
+        <!-- main element is to display weather for selected city -->
+        <main>
+            <!-- this section element is for today's weather -->
+            <section>
+                <h2>City Name</h2>
+                <ul>
+                    <li>Temp:</li>
+                    <li>Wind:</li>
+                    <li>Humidity:</li>
+                </ul>
+            </section>
+
             <h3>5-Day Forecast</h3>
-            <!-- these are sections for the days -->
-            <div id="day1">
-               <h4>Date</h4>
-               <img></img>
-               <ul>
-                <li>Temp:</li>
-                <li>Wind:</li>
-                <li>Humidity:</li>
-               </ul>
+            <!-- this div element is for 5 day forecast -->
+            <div>
+                <!-- these are sections for the days -->
+                <section id="day1">
+                    <h4>Date</h4>
+                    <img></img>
+                    <ul>
+                        <li>Temp:</li>
+                        <li>Wind:</li>
+                        <li>Humidity:</li>
+                    </ul>   
+                </section>
+                <section id="day2">
+                    <h4>Date</h4>
+                    <img></img>
+                    <ul>
+                    <li>Temp:</li>
+                    <li>Wind:</li>
+                    <li>Humidity:</li>
+                    </ul>
+                </section>
+                <section id="day3">
+                    <h4>Date</h4>
+                    <img></img>
+                    <ul>
+                    <li>Temp:</li>
+                    <li>Wind:</li>
+                    <li>Humidity:</li>
+                    </ul>
+                </section>
+                <section id="day4">
+                    <h4>Date</h4>
+                    <img></img>
+                    <ul>
+                    <li>Temp:</li>
+                    <li>Wind:</li>
+                    <li>Humidity:</li>
+                    </ul>
+                </section>
+                <section id="day5">
+                    <h4>Date</h4>
+                    <img></img>
+                    <ul>
+                    <li>Temp:</li>
+                    <li>Wind:</li>
+                    <li>Humidity:</li>
+                    </ul>
+                </section>
             </div>
-            <div id="day2">
-                <h4>Date</h4>
-                <img></img>
-                <ul>
-                 <li>Temp:</li>
-                 <li>Wind:</li>
-                 <li>Humidity:</li>
-                </ul>
-             </div>
-             <div id="day3">
-                <h4>Date</h4>
-                <img></img>
-                <ul>
-                 <li>Temp:</li>
-                 <li>Wind:</li>
-                 <li>Humidity:</li>
-                </ul>
-             </div>
-             <div id="day4">
-                <h4>Date</h4>
-                <img></img>
-                <ul>
-                 <li>Temp:</li>
-                 <li>Wind:</li>
-                 <li>Humidity:</li>
-                </ul>
-             </div>
-             <div id="day5">
-                <h4>Date</h4>
-                <img></img>
-                <ul>
-                 <li>Temp:</li>
-                 <li>Wind:</li>
-                 <li>Humidity:</li>
-                </ul>
-             </div>
-        </section>
+        </main>
 
-
-    </main>
+    </div>
 
 </body>
 </html>
