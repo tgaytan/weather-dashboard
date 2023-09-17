@@ -13,9 +13,21 @@ let windEl = document.getElementById('wind-0');
 
 let state = "";
 
+let searchValues = {
+    data : [{}]
+};
+
+searchValues = JSON.parse(localStorage.getItem("prevSearches"));
+
 // console.log(buttonEl);
 // console.log(cityEl);
 // console.log(stateEl);
+
+function init() {
+    if (searchValues) {
+        console.log(searchValues.data[1].city, searchValues.data[1].state);
+    }
+}
 
 function showWeather() {
     console.log('button is clicked');
@@ -26,6 +38,13 @@ function showWeather() {
     state = stateEl.value;
     // console.log("the city is " + city + " and the state is " + state);
     getCoordinates(city, state);
+
+    let newSearch = {city:city, state: state};
+    searchValues.data.push(newSearch);
+    console.log(newSearch);
+    console.log(searchValues.data)
+
+    localStorage.setItem("prevSearches", JSON.stringify(searchValues));
 }
 
 function getCoordinates(city, state) {
@@ -102,10 +121,8 @@ function displayData(data) {
     tempEl.textContent = "Temp: " + temp + "° F";
     humidityEl.textContent = "Humidity: " + humidity + " %";
     windEl.textContent = "Wind: " + windSpeed + " mph";
-
-
 }
 
-
+init();
 
 buttonEl.addEventListener('click', showWeather);
