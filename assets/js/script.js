@@ -11,6 +11,7 @@ let tempEl = document.getElementById('temp-0');
 let humidityEl = document.getElementById('humidity-0');
 let windEl = document.getElementById('wind-0');
 let oldSearchEl = document.getElementById('old-searches');
+let mainIconEl = document.getElementById('main-icon');
 
 let state = "";
 
@@ -24,7 +25,7 @@ function init() {
     oldSearchEl.textContent = "";
     if (searchValues) {
         for (let i = 1; i < searchValues.data.length; i++) {
-            console.log(searchValues);
+            // console.log(searchValues);
             let liEl = document.createElement('li');
             liEl.textContent = searchValues.data[i].city + ", " + searchValues.data[i].state;
             oldSearchEl.appendChild(liEl);
@@ -98,10 +99,23 @@ function displayData(data) {
     // console.log(windSpeed);
     let city = data.city.name;
     let currentDate = new Date(data.list[0].dt * 1000);
+    let lastTime = new Date(data.list[39].dt * 1000);
+    console.log(currentDate);
+    console.log(lastTime);
     let month = currentDate.getMonth();
     let day = currentDate.getDate();
     let year = currentDate.getFullYear();
     cityTitleEl.textContent = city + ", " + state + " (" + month + "/" + day + "/" + year + ")";
+    // cityTitleEl.textContent = city + ", " + state + " (" + month + "/" + day + "/" + year + ")";
+    tempEl.textContent = "Temp: " + temp + "° F";
+    humidityEl.textContent = "Humidity: " + humidity + " %";
+    windEl.textContent = "Wind: " + windSpeed + " mph";
+
+    let weatherIcon = data.list[0].weather[0].icon;
+    let iconURL = "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
+    console.log(data);
+    mainIconEl.setAttribute("src", iconURL);
+
 
     // console.log(data.list.length);
     let y = 1;
@@ -118,7 +132,10 @@ function displayData(data) {
             let dailyMonth = nextDay.getMonth();
             let dailyDay = nextDay.getDate();
             let dailyYear = nextDay.getFullYear();
+            let weatherIcon = data.list[i].weather[0].icon;
+            let iconURL = "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
 
+            dailyEl.children[1].setAttribute('src', iconURL);
             dailyEl.children[0].textContent = dailyMonth + "/" + dailyDay + "/" + dailyYear;
             dailyEl.children[2].children[0].textContent = "Temp: " + dailyTemp + "° F";
             dailyEl.children[2].children[1].textContent = "Wind: " + dailyWindSpeed + " mph";
@@ -127,11 +144,6 @@ function displayData(data) {
             y++;
         }
     }
-
-    // cityTitleEl.textContent = city + ", " + state + " (" + month + "/" + day + "/" + year + ")";
-    tempEl.textContent = "Temp: " + temp + "° F";
-    humidityEl.textContent = "Humidity: " + humidity + " %";
-    windEl.textContent = "Wind: " + windSpeed + " mph";
 }
 
 init();
