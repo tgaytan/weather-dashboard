@@ -68,9 +68,9 @@ function displayData(data) {
     // console.log(windSpeed);
     let city = data.city.name;
     let currentDate = new Date(data.list[0].dt * 1000);
-    month = currentDate.getMonth();
-    day = currentDate.getDate();
-    year = currentDate.getFullYear();
+    let month = currentDate.getMonth();
+    let day = currentDate.getDate();
+    let year = currentDate.getFullYear();
     cityTitleEl.textContent = city + ", " + state + " (" + month + "/" + day + "/" + year + ")";
 
     // console.log(data.list.length);
@@ -79,9 +79,15 @@ function displayData(data) {
         let nextDay = new Date(data.list[i].dt * 1000);
         if (nextDay.getDate() === day + 1) {
             // console.log(nextDay.getDay());
-            console.log(y);
+            // console.log(y);
             let dailyEl = document.getElementById('day' + y);
-            console.log(dailyEl);
+            // console.log(dailyEl);
+            let dailyTemp = data.list[i].main.temp;
+            let dailyHumidity = data.list[i].main.humidity;
+            let dailyWindSpeed = data.list[i].wind.speed;
+            let dailyMonth = nextDay.getMonth();
+            let dailyDay = nextDay.getDate();
+            let dailyYear = nextDay.getFullYear();
             day++;
             y++;
         }
