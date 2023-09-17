@@ -81,13 +81,18 @@ function displayData(data) {
             // console.log(nextDay.getDay());
             // console.log(y);
             let dailyEl = document.getElementById('day' + y);
-            // console.log(dailyEl);
+            // console.log(dailyEl.children);
             let dailyTemp = data.list[i].main.temp;
             let dailyHumidity = data.list[i].main.humidity;
             let dailyWindSpeed = data.list[i].wind.speed;
             let dailyMonth = nextDay.getMonth();
             let dailyDay = nextDay.getDate();
             let dailyYear = nextDay.getFullYear();
+
+            dailyEl.children[0].textContent = dailyMonth + "/" + dailyDay + "/" + dailyYear;
+            dailyEl.children[2].children[0].textContent = "Temp: " + dailyTemp + "° F";
+            dailyEl.children[2].children[1].textContent = "Wind: " + dailyWindSpeed + " mph";
+            dailyEl.children[2].children[2].textContent = "Humidity: " + dailyHumidity + " %";
             day++;
             y++;
         }
@@ -95,8 +100,8 @@ function displayData(data) {
 
     // cityTitleEl.textContent = city + ", " + state + " (" + month + "/" + day + "/" + year + ")";
     tempEl.textContent = "Temp: " + temp + "° F";
-    humidityEl.textContent = humidity + " %";
-    windEl.textContent = windSpeed + " mph";
+    humidityEl.textContent = "Humidity: " + humidity + " %";
+    windEl.textContent = "Wind: " + windSpeed + " mph";
 
 
 }
