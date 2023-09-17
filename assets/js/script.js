@@ -53,7 +53,7 @@ function getWeatherData(lat, long) {
             return response.json();
         })
         .then(function(data) {
-            // console.log(data);
+            console.log(data);
             displayData(data);
         });
 }
@@ -67,16 +67,32 @@ function displayData(data) {
     let windSpeed = data.list[0].wind.speed;
     // console.log(windSpeed);
     let city = data.city.name;
-    let date = new Date(data.list[0].dt * 1000);
-    month = date.getMonth();
-    day = date.getDate();
-    year = date.getFullYear();
-
-
+    let currentDate = new Date(data.list[0].dt * 1000);
+    month = currentDate.getMonth();
+    day = currentDate.getDate();
+    year = currentDate.getFullYear();
     cityTitleEl.textContent = city + ", " + state + " (" + month + "/" + day + "/" + year + ")";
+
+    // console.log(data.list.length);
+    let y = 1;
+    for (let i = 0; i < data.list.length; i++) {
+        let nextDay = new Date(data.list[i].dt * 1000);
+        if (nextDay.getDate() === day + 1) {
+            // console.log(nextDay.getDay());
+            console.log(y);
+            let dailyEl = document.getElementById('day' + y);
+            console.log(dailyEl);
+            day++;
+            y++;
+        }
+    }
+
+    // cityTitleEl.textContent = city + ", " + state + " (" + month + "/" + day + "/" + year + ")";
     tempEl.textContent = "Temp: " + temp + "° F";
     humidityEl.textContent = humidity + " %";
     windEl.textContent = windSpeed + " mph";
+
+
 }
 
 
