@@ -29,6 +29,18 @@ aside * {
     margin: 5px;
 }
 
+.prev-searches, #searchButton {
+    color: black;
+    background-color: gray;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.prev-searches:hover, #searchButton:hover {
+    background-color: rgb(17, 8, 98);
+    color: white;
+}
+
 main {
     flex-grow: 4;
     margin: 5px;

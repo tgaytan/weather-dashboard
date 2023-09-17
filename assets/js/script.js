@@ -29,6 +29,7 @@ function init() {
         for (let i = 1; i < searchValues.data.length; i++) {
             // console.log(searchValues);
             let liEl = document.createElement('li');
+            liEl.setAttribute('class', 'prev-searches');
             liEl.textContent = searchValues.data[i].city + ", " + searchValues.data[i].state;
             oldSearchEl.appendChild(liEl);
         }
