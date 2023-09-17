@@ -10,12 +10,9 @@ let cityTitleEl = document.getElementById('city-title');
 let tempEl = document.getElementById('temp-0');
 let humidityEl = document.getElementById('humidity-0');
 let windEl = document.getElementById('wind-0');
+let oldSearchEl = document.getElementById('old-searches');
 
 let state = "";
-
-let searchValues = {
-    data : [{}]
-};
 
 searchValues = JSON.parse(localStorage.getItem("prevSearches"));
 
@@ -24,13 +21,19 @@ searchValues = JSON.parse(localStorage.getItem("prevSearches"));
 // console.log(stateEl);
 
 function init() {
+    oldSearchEl.textContent = "";
     if (searchValues) {
-        console.log(searchValues.data[1].city, searchValues.data[1].state);
+        for (let i = 1; i < searchValues.data.length; i++) {
+            console.log(searchValues);
+            let liEl = document.createElement('li');
+            liEl.textContent = searchValues.data[i].city + ", " + searchValues.data[i].state;
+            oldSearchEl.appendChild(liEl);
+        }
     }
 }
 
 function showWeather() {
-    console.log('button is clicked');
+    // console.log('button is clicked');
     // console.log(cityEl.value);
     // console.log(stateEl.value);
 
@@ -40,11 +43,19 @@ function showWeather() {
     getCoordinates(city, state);
 
     let newSearch = {city:city, state: state};
-    searchValues.data.push(newSearch);
-    console.log(newSearch);
-    console.log(searchValues.data)
 
+    if (!searchValues) {
+        searchValues = {
+            data : [{}]
+        };
+    }
+
+    searchValues.data.push(newSearch);
     localStorage.setItem("prevSearches", JSON.stringify(searchValues));
+    init();
+
+    // console.log(newSearch);
+    // console.log(searchValues.data)
 }
 
 function getCoordinates(city, state) {
@@ -58,7 +69,7 @@ function getCoordinates(city, state) {
             // console.log(data);
             let lat = data[0].lat; //.slice(0,5);
             let long = data[0].lon; //.slice(0,4);
-            console.log("the late and long is " + lat + "    " + long);
+            // console.log("the late and long is " + lat + "    " + long);
             getWeatherData(lat, long);
         });
 }
@@ -72,7 +83,7 @@ function getWeatherData(lat, long) {
             return response.json();
         })
         .then(function(data) {
-            console.log(data);
+            // console.log(data);
             displayData(data);
         });
 }
