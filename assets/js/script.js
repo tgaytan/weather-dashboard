@@ -12,10 +12,12 @@ let humidityEl = document.getElementById('humidity-0');
 let windEl = document.getElementById('wind-0');
 let oldSearchEl = document.getElementById('old-searches');
 let mainIconEl = document.getElementById('main-icon');
+let submitEl = document.getElementById('search-div');
+console.log(submitEl);
 
 let state = "";
 
-searchValues = JSON.parse(localStorage.getItem("prevSearches"));
+let searchValues = JSON.parse(localStorage.getItem("prevSearches"));
 
 // console.log(buttonEl);
 // console.log(cityEl);
@@ -33,7 +35,8 @@ function init() {
     }
 }
 
-function showWeather() {
+function showWeather(event) {
+    event.preventDefault();
     // console.log('button is clicked');
     // console.log(cityEl.value);
     // console.log(stateEl.value);
@@ -148,4 +151,4 @@ function displayData(data) {
 
 init();
 
-buttonEl.addEventListener('click', showWeather);
+submitEl.addEventListener('submit', showWeather);
