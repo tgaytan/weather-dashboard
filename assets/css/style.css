@@ -33,7 +33,12 @@ aside * {
     color: black;
     background-color: gray;
     border-radius: 5px;
-    padding: 3px;
+    padding: 5px;
+    text-align: center;
+    display: block;
+    margin: 5px auto;
+    width: 80%;
+    font-weight: bold;
 }
 
 .prev-searches:hover, #searchButton:hover {

@@ -1,19 +1,16 @@
 // let requestURL = "http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}";
 const apiKey = "c86eb0623623101a8c7e3c242f3d9989";
-const testURL = "http://api.openweathermap.org/geo/1.0/direct?q=austin,tx,us&limit=1&appid=" + apiKey;
 
-
-let buttonEl = document.getElementById('searchButton');
-let cityEl = document.getElementById('searchCity');
-let stateEl = document.getElementById('searchST');
-let cityTitleEl = document.getElementById('city-title');
-let tempEl = document.getElementById('temp-0');
-let humidityEl = document.getElementById('humidity-0');
-let windEl = document.getElementById('wind-0');
-let oldSearchEl = document.getElementById('old-searches');
-let mainIconEl = document.getElementById('main-icon');
-let submitEl = document.getElementById('search-div');
-console.log(submitEl);
+const cityEl = document.getElementById('searchCity');
+const stateEl = document.getElementById('searchST');
+const cityTitleEl = document.getElementById('city-title');
+const tempEl = document.getElementById('temp-0');
+const humidityEl = document.getElementById('humidity-0');
+const windEl = document.getElementById('wind-0');
+const oldSearchEl = document.getElementById('old-searches');
+const mainIconEl = document.getElementById('main-icon');
+const submitEl = document.getElementById('search-div');
+// console.log(submitEl);
 
 let state = "";
 
@@ -28,10 +25,12 @@ function init() {
     if (searchValues) {
         for (let i = 1; i < searchValues.data.length; i++) {
             // console.log(searchValues);
-            let liEl = document.createElement('li');
-            liEl.setAttribute('class', 'prev-searches');
-            liEl.textContent = searchValues.data[i].city + ", " + searchValues.data[i].state;
-            oldSearchEl.appendChild(liEl);
+            let buttonEl = document.createElement('button');
+            buttonEl.setAttribute('class', 'prev-searches');
+            buttonEl.setAttribute('type','submit');
+            buttonEl.setAttribute('data-element', 'list');
+            buttonEl.textContent = searchValues.data[i].city + ", " + searchValues.data[i].state;
+            oldSearchEl.appendChild(buttonEl);
         }
     }
 }
@@ -42,22 +41,44 @@ function showWeather(event) {
     // console.log(cityEl.value);
     // console.log(stateEl.value);
 
-    let city = cityEl.value;
-    state = stateEl.value;
-    // console.log("the city is " + city + " and the state is " + state);
-    getCoordinates(city, state);
+    // console.log("test");
+    // console.log(event.target);
 
-    let newSearch = {city:city, state: state};
+    console.log(event);
+    if (event.submitter.dataset.element === "search-bar") {
+    
 
-    if (!searchValues) {
-        searchValues = {
-            data : [{}]
-        };
+        let city = cityEl.value;
+        state = stateEl.value;
+        // console.log("the city is " + city + " and the state is " + state);
+        getCoordinates(city, state);
+
+        let newSearch = {city:city, state: state};
+
+        if (!searchValues) {
+            searchValues = {
+                data : [{}]
+            };
+        }
+
+        searchValues.data.push(newSearch);
+        localStorage.setItem("prevSearches", JSON.stringify(searchValues));
+        init();
+    } else {
+        let oldSearch = event.submitter.innerText.split(",");
+        let city = oldSearch[0];
+        state = oldSearch[1];
+        getCoordinates(city, state);
+
+        let newSearch = {city:city, state: state};
+
+        if (!searchValues) {
+            searchValues = {
+                data : [{}]
+            };
+        }
+
     }
-
-    searchValues.data.push(newSearch);
-    localStorage.setItem("prevSearches", JSON.stringify(searchValues));
-    init();
 
     // console.log(newSearch);
     // console.log(searchValues.data)
@@ -104,8 +125,8 @@ function displayData(data) {
     let city = data.city.name;
     let currentDate = new Date(data.list[0].dt * 1000);
     let lastTime = new Date(data.list[39].dt * 1000);
-    console.log(currentDate);
-    console.log(lastTime);
+    // console.log(currentDate);
+    // console.log(lastTime);
     let month = currentDate.getMonth();
     let day = currentDate.getDate();
     let year = currentDate.getFullYear();
@@ -117,7 +138,7 @@ function displayData(data) {
 
     let weatherIcon = data.list[0].weather[0].icon;
     let iconURL = "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
-    console.log(data);
+    // console.log(data);
     mainIconEl.setAttribute("src", iconURL);
 
 
