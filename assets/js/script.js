@@ -15,8 +15,14 @@ const submitEl = document.getElementById('search-div');
 // does not provide state information back. need to save it from user input
 let state;
 
-// pulling from local storage and saving in variable
+// pulling from local storage and saving in object
+// if local storage is empty, then format of object is defined
 let searchValues = JSON.parse(localStorage.getItem("prevSearches"));
+if (!searchValues) {
+    searchValues = {
+        data : [{}]
+    };
+}
 
 // this function runs when the page is first loaded, and also when a new search is done
 // it gets prevoius searches and displays them on the webpage
@@ -40,7 +46,7 @@ function init() {
 
 // this function gets the user input from either the search bar or from previous searches
 // then it takes the input (city/state) and calls a function to convert to coordinates
-function showWeather(event) {
+function getCity(event) {
     event.preventDefault(); // stop pages from refreshing
 
     // checking if the event came from the search bar, or if it came from one of the old searches
@@ -54,15 +60,6 @@ function showWeather(event) {
 
         // storing the city and state from user in an object. this will be pushed into an array later
         let newSearch = {city:city, state: state};
-
-        // defining the format of object searchValues. this object is first created
-        // with data pulled from local storage. but if local storage is empty,
-        // the format is defined here
-        if (!searchValues) {
-            searchValues = {
-                data : [{}]
-            };
-        }
 
         // pushing the new search into an object.arry, then storing in local storage
         // then calling init function which will add the new search to previous searches section
@@ -165,7 +162,7 @@ function displayData(data) {
     }
 }
 
-// this runs when the browser loads and displays old searches
+// this runs when the browser loads the page and displays old searches
 init();
 
-submitEl.addEventListener('submit', showWeather);
+submitEl.addEventListener('submit', getCity);
