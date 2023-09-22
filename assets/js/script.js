@@ -79,7 +79,7 @@ function getCity(event) {
 // this function takes the city/state values and converts to coordinates using OpenWeather API
 // it then passes the lat and lon into a function getWeatherData that gets weather based on coordinates
 function getCoordinates(city, state) {
-    const geoURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "," + state + ",us&limit=1&appid=" + apiKey;
+    const geoURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "," + state + ",us&limit=1&appid=" + apiKey;
     fetch(geoURL)
         .then(function(response) {
             return response.json();
@@ -95,7 +95,7 @@ function getCoordinates(city, state) {
 // the data returned from the API is then sent to the function displayData
 function getWeatherData(lat, long) {
     // console.log("lat, long")
-    let weatherURL = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + long + "&units=imperial&appid=" + apiKey;
+    let weatherURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + long + "&units=imperial&appid=" + apiKey;
     // console.log(weatherURL);
     fetch(weatherURL)
         .then(function(response) {
